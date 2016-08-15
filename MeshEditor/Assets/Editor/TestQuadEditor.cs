@@ -71,14 +71,14 @@ public class TestQuadEditor : Editor
 			setVertices = false;
 
 			defaultBottomLeft = editor.mesh.vertices[0];
-	        defaultTopRight = editor.mesh.vertices[1];
-	        defaultBottomRight = editor.mesh.vertices[2];
-	        defaultTopLeft = editor.mesh.vertices[3];
-
-	    	bottomLeft = editor.mesh.vertices[0];
-	        topRight = editor.mesh.vertices[1];
-	        bottomRight = editor.mesh.vertices[2];
-	        topLeft = editor.mesh.vertices[3];
+		        defaultTopRight = editor.mesh.vertices[1];
+		        defaultBottomRight = editor.mesh.vertices[2];
+		        defaultTopLeft = editor.mesh.vertices[3];
+	
+		    	bottomLeft = editor.mesh.vertices[0];
+		        topRight = editor.mesh.vertices[1];
+		        bottomRight = editor.mesh.vertices[2];
+		        topLeft = editor.mesh.vertices[3];
 		}
 
         int controlID = GUIUtility.GetControlID(FocusType.Passive);
