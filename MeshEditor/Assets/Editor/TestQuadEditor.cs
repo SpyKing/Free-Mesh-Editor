@@ -13,9 +13,6 @@ public class TestQuadEditor : Editor
     private bool isMouseDragging;
     private bool setVertices = true;
     private VertNames selectedVertex;
-
-    private string saveName;
-    private string parentFolderName;
     private string filePath;
 
     private Vector3
@@ -44,12 +41,6 @@ public class TestQuadEditor : Editor
 
 	    EditorGUILayout.Space();
 
-	    saveName = EditorGUILayout.TextField("File Name", saveName);
-
-        EditorGUILayout.Space();
-
-        parentFolderName = EditorGUILayout.TextField("Folder Path", parentFolderName);
-
 	    EditorGUILayout.Space();
 
 	    if (GUILayout.Button("Reset Vertices"))
@@ -63,10 +54,12 @@ public class TestQuadEditor : Editor
 	    EditorGUILayout.Space();
 
 	    if (GUILayout.Button("Done"))
-	    { 
-            
-            filePath = parentFolderName + saveName + ".prefab";
-            AssetDatabase.CreateAsset(editor.mesh, filePath);
+	    {
+            filePath = EditorUtility.SaveFilePanelInProject("Save Mesh", "New Mesh", "prefab", "Please enter a file name to save the mesh to");
+            if (filePath != "")
+            {
+                AssetDatabase.CreateAsset(editor.mesh, filePath);
+            }
 	    }
     }
 
