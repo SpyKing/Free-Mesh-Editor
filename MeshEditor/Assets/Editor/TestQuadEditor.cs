@@ -1,7 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 
-//TODO: Add undo functionality 
 [CustomEditor(typeof(QuadEditor))]
 public class TestQuadEditor : Editor
 {
@@ -92,7 +91,7 @@ public class TestQuadEditor : Editor
         {
             Ray screenToWordCoords = Camera.current.ScreenPointToRay(new Vector3(Event.current.mousePosition.x, -Event.current.mousePosition.y + Camera.current.pixelHeight));
             Vector3 mousePos = screenToWordCoords.origin;
-            //Vector3 mousePos = Camera.current.ScreenToWorldPoint(Event.current.mousePosition);
+
             mousePos = new Vector3(mousePos.x, mousePos.y, editor.transform.position.z);
 
             Handles.color = GetHandleColor(VertNames.TopLeft);
@@ -181,21 +180,20 @@ public class TestQuadEditor : Editor
         if (!isMouseDragging)
         { return; }
 
-        targetPos = editor.transform.position;
 
         switch (selectedVertex)
         {
             case VertNames.TopLeft:
-            	topLeft = targetPos;
+            	topLeft = targetPos - editor.transform.position;
                 break;
             case VertNames.TopRight:
-            	topRight = targetPos;
+            	topRight = targetPos - editor.transform.position;
                 break;
             case VertNames.BottomLeft:
-            	bottomLeft = targetPos;
+            	bottomLeft = targetPos - editor.transform.position;
                 break;
             case VertNames.BottomRight:
-            	bottomRight = targetPos;
+            	bottomRight = targetPos - editor.transform.position;
                 break;
         }
     }
