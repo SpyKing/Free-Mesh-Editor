@@ -89,12 +89,14 @@ public class TestQuadEditor : Editor
             HandleUtility.AddDefaultControl(controlID);
         }
         else
-        {        	
+        {
             Ray screenToWordCoords = Camera.current.ScreenPointToRay(new Vector3(Event.current.mousePosition.x, -Event.current.mousePosition.y + Camera.current.pixelHeight));
             Vector3 mousePos = screenToWordCoords.origin;
+            //Vector3 mousePos = Camera.current.ScreenToWorldPoint(Event.current.mousePosition);
             mousePos = new Vector3(mousePos.x, mousePos.y, editor.transform.position.z);
 
             Handles.color = GetHandleColor(VertNames.TopLeft);
+            Debug.Log(topLeft+editor.transform.position);
             Handles.SphereCap(controlID, new Vector3(editor.transform.position.x + topLeft.x, editor.transform.position.y + topLeft.y, 0), editor.transform.rotation, 0.05f);
             Handles.color = GetHandleColor(VertNames.TopRight);
             Handles.SphereCap(controlID, new Vector3(editor.transform.position.x + topRight.x, editor.transform.position.y + topRight.y, 0), editor.transform.rotation, 0.05f);
@@ -130,6 +132,8 @@ public class TestQuadEditor : Editor
 
     void UpdateVertexHandles(Vector3 mousePos, bool mouseUp = false)
     {
+        Debug.Log("Update Vertex Handles " + mousePos);
+
         if (mouseUp)
         {
             selectTopLeft = false;
@@ -140,6 +144,8 @@ public class TestQuadEditor : Editor
         }
         else
         {
+            Debug.Log((mousePos - (topLeft + editor.transform.position)).magnitude);
+
             selectTopLeft = (Vector3.Distance(new Vector3(editor.transform.position.x + topLeft.x, editor.transform.position.y + topLeft.y, 0), mousePos) < 0.05f) ? true : false;
             selectTopRight = (Vector3.Distance(new Vector3(editor.transform.position.x + topRight.x, editor.transform.position.y + topRight.y, 0), mousePos) < 0.05f) ? true : false;
             selectBottomLeft = (Vector3.Distance(new Vector3(editor.transform.position.x + bottomLeft.x, editor.transform.position.y + bottomLeft.y, 0), mousePos) < 0.05f) ? true : false;
@@ -174,6 +180,8 @@ public class TestQuadEditor : Editor
     {
         if (!isMouseDragging)
         { return; }
+
+        targetPos = editor.transform.position;
 
         switch (selectedVertex)
         {
